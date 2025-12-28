@@ -1,0 +1,43 @@
+#!/bin/bash
+export PATH="$PATH:/run/current-system/sw/bin"
+
+source "$CONFIG_DIR/colors.sh"
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+ITEM_DIR="$CONFIG_DIR/items"
+
+
+sketchybar --bar position=top \
+		 height=32 \
+		 blur_radius=30 \
+		 color=$MOCHA_BASE \
+
+#### Defaults ####
+default=(
+  padding_left=5
+  padding_right=5
+  icon.font="DepartureMono Nerd Font:Regular:14.0"
+  label.font="DepartureMono Nerd Font:Regular:14.0"
+  label.color=$MOCHA_TEXT
+  icon.padding_left=10
+  icon.padding_right=4
+  label.padding_left=4
+  label.padding_right=10
+  background.corner_radius=5
+  background.height=24
+  background.color=$MOCHA_SURFACE0
+)
+sketchybar --default "${default[@]}"
+
+# -- Leftside items --
+source $ITEM_DIR/front_app.sh
+source $ITEM_DIR/spaces.sh
+
+
+# -- Rightside items --
+
+source $ITEM_DIR/calendar.sh
+source $ITEM_DIR/volume.sh
+source $ITEM_DIR/battery.sh
+
+sketchybar --update
